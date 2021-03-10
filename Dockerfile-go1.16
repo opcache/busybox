@@ -1,0 +1,16 @@
+FROM golang:1.16.0-alpine3.13 as builder
+
+WORKDIR /go/src/dns/
+
+COPY . .
+
+RUN go build  -o hello-dns
+
+FROM alpine:latest
+
+COPY --from=builder /go/src/dns/hello-dns /usr/local/bin/
+
+EXPOSE 8080
+##CMD ["/usr/local/bin/hello-dns"]
+
+ENTRYPOINT ["tail","-f","/dev/null"]
