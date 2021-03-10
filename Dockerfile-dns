@@ -4,7 +4,7 @@ WORKDIR /go/src/dns/
 
 COPY . .
 
-RUN go build -o hello-dns
+RUN go build hello-dns.go -o hello-dns
 
 FROM alpine:latest
 
