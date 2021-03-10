@@ -1,8 +1,8 @@
 FROM golang:1.11.3-alpine3.8 as builder
 
-COPY . .
-
 WORKDIR /go/src/dns/
+
+COPY . .
 
 RUN go build  -o hello-dns
 
