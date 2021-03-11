@@ -1,4 +1,4 @@
-FROM gopcache/golang-centos7-builder:latest as builder
+FROM opcache/golang-centos7-builder:latest as builder
 
 WORKDIR /go/src/dns/
 
