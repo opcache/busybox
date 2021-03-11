@@ -1,0 +1,18 @@
+FROM gopcache/golang-centos7-builder:latest as builder
+
+WORKDIR /go/src/dns/
+
+COPY . .
+
+RUN go build  -o hello-dns
+
+FROM centos:7
+
+RUN  yum install -y net-tools nc wget curl nmap telnet bind-utils initscripts lsof
+
+ADD sh /opt/sh
+COPY --from=builder /go/src/dns/hello-dns /usr/local/bin/
+
+RUN  bash /opt/sh/unixbench-install.sh 
+
+ENTRYPOINT ["tail","-f","/dev/null"]
